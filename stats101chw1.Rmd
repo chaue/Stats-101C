@@ -1,0 +1,101 @@
+---
+title: "Stats 101C Lec 3 HW 1"
+author: "Edwin Chau"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Q8 Part a
+```{r}
+college <- read.csv("C:/Users/Edwin/Downloads/College.csv")
+```
+
+# Q8 Part b
+```{r}
+#fix(college)
+rownames(college) <- college[,1]
+#fix(college)
+college <- college[,-1]
+#fix(college)
+```
+
+# Q8 Part c
+```{r}
+# i-iii
+summary(college)
+pairs(college[, 1:10])
+plot(college$Outstate ~ college$Private)
+
+#iv
+Elite <- rep("No", nrow(college))
+Elite[college$Top10perc>50]="Yes"
+Elite <- as.factor(Elite)
+college <- data.frame(college, Elite)
+summary(college$Elite)
+plot(college$Outstate ~ college$Elite)
+
+# V
+par(mfrow=c(2,2))
+hist(college$Apps, breaks=7)
+hist(college$Room.Board, breaks=10)
+hist(college$Outstate, breaks=15)
+hist(college$Expend, breaks=20)
+
+# vi
+par(mfrow=c(2,2))
+plot(college$Enroll ~ college$Private)
+plot(college$Grad.Rate ~ college$Private)
+plot(college$perc.alumni ~ college$Private)
+plot(college$S.F.Ratio ~ college$Private)
+```
+## Private colleges have a lower enrollment rate than public colleges, which is no surprise. They also have a slightly higher graduation rate, which may be the result of higher tuition or student investment in their education, reflected by their choice of private over public. Private colleges also have a higher percentage of donating alumni, which could be the result of their commonly stronger alumni networks. Finally, private colleges have a lower student to faculty ratio, which reflects their lower enrollment rates compared to public colleges.
+
+# Q9 Part a
+```{r}
+library(ISLR)
+Auto <- na.omit(Auto)
+str(Auto)
+```
+## Qualitative predictors are name and origin, and all others are quanitative.
+
+# Q9 Part b
+```{r}
+ranges <- apply(Auto[,1:7], 2, range)
+rownames(ranges) <- c("min", "max")
+ranges
+```
+
+# Q9 Part c
+```{r}
+means <- apply(Auto[,1:7], 2, mean)
+sds <- apply(Auto[,1:7], 2, sd)
+rbind(means, sds)
+```
+
+# Q9 Part d
+```{r}
+newranges <- apply(Auto[-(10:85), 1:7], 2, range)
+rownames(newranges) <- c("min", "max")
+newmeans <- apply(Auto[-(10:85), 1:7], 2, mean)
+newsds <- apply(Auto[-(10:85), 1:7], 2, sd)
+rbind(newranges, newmeans, newsds)
+```
+
+# Q9 Part e
+```{r}
+par(mfrow=c(2,2))
+plot(Auto$mpg ~ Auto$weight)
+plot(Auto$mpg ~ Auto$horsepower)
+plot(Auto$horsepower ~ Auto$acceleration)
+plot(Auto$mpg ~ Auto$year)
+```
+## Miles per gallon is inversely related to the weight, which is intuitive as more weight requires more fuel per gallon, lowering efficiency. Miles per gallon is also inversely related to horsepower, which indicates that more powerful engines are less efficient, which is also intuitive. Engine horsepower is inversely related to acceleration rate, which is again obvious. Finally, miles per gallon seems to slowly increase with year, which indicates that newer cars are more fuel efficient. 
+
+# Q9 Part f
+## The plots suggest that weight and horsepower might be good indicators of miles per gallon, as they both have strong negative linear relationships with mpg. Year is a weaker predictor of miles per gallon, as there may not be a large, if significant difference in miles per gallon of older vehicles vs newer vehicles.
+
+
+
