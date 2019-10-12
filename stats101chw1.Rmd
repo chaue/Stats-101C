@@ -5,16 +5,16 @@ output: pdf_document
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = FALSE)
 ```
 
 # Q8 Part a
-```{r}
+```{r echo=FALSE}
 college <- read.csv("C:/Users/Edwin/Downloads/College.csv")
 ```
 
 # Q8 Part b
-```{r}
+```{r echo=FALSE}
 #fix(college)
 rownames(college) <- college[,1]
 #fix(college)
@@ -23,7 +23,7 @@ college <- college[,-1]
 ```
 
 # Q8 Part c
-```{r}
+```{r echo=FALSE}
 # i-iii
 summary(college)
 pairs(college[, 1:10])
@@ -51,32 +51,32 @@ plot(college$Grad.Rate ~ college$Private)
 plot(college$perc.alumni ~ college$Private)
 plot(college$S.F.Ratio ~ college$Private)
 ```
-## Private colleges have a lower enrollment rate than public colleges, which is no surprise. They also have a slightly higher graduation rate, which may be the result of higher tuition or student investment in their education, reflected by their choice of private over public. Private colleges also have a higher percentage of donating alumni, which could be the result of their commonly stronger alumni networks. Finally, private colleges have a lower student to faculty ratio, which reflects their lower enrollment rates compared to public colleges.
+Private colleges have a lower enrollment rate than public colleges, which is no surprise. They also have a slightly higher graduation rate, which may be the result of higher tuition or student investment in their education, reflected by their choice of private over public. Private colleges also have a higher percentage of donating alumni, which could be the result of their commonly stronger alumni networks. Finally, private colleges have a lower student to faculty ratio, which reflects their lower enrollment rates compared to public colleges.
 
 # Q9 Part a
-```{r}
+```{r echo=FALSE}
 library(ISLR)
 Auto <- na.omit(Auto)
 str(Auto)
 ```
-## Qualitative predictors are name and origin, and all others are quanitative.
+Qualitative predictors are name and origin, and all others are quanitative.
 
 # Q9 Part b
-```{r}
+```{r echo=FALSE}
 ranges <- apply(Auto[,1:7], 2, range)
 rownames(ranges) <- c("min", "max")
 ranges
 ```
 
 # Q9 Part c
-```{r}
+```{r echo=FALSE}
 means <- apply(Auto[,1:7], 2, mean)
 sds <- apply(Auto[,1:7], 2, sd)
 rbind(means, sds)
 ```
 
 # Q9 Part d
-```{r}
+```{r echo=FALSE}
 newranges <- apply(Auto[-(10:85), 1:7], 2, range)
 rownames(newranges) <- c("min", "max")
 newmeans <- apply(Auto[-(10:85), 1:7], 2, mean)
@@ -85,17 +85,17 @@ rbind(newranges, newmeans, newsds)
 ```
 
 # Q9 Part e
-```{r}
+```{r echo=FALSE}
 par(mfrow=c(2,2))
 plot(Auto$mpg ~ Auto$weight)
 plot(Auto$mpg ~ Auto$horsepower)
 plot(Auto$horsepower ~ Auto$acceleration)
 plot(Auto$mpg ~ Auto$year)
 ```
-## Miles per gallon is inversely related to the weight, which is intuitive as more weight requires more fuel per gallon, lowering efficiency. Miles per gallon is also inversely related to horsepower, which indicates that more powerful engines are less efficient, which is also intuitive. Engine horsepower is inversely related to acceleration rate, which is again obvious. Finally, miles per gallon seems to slowly increase with year, which indicates that newer cars are more fuel efficient. 
+Miles per gallon is inversely related to the weight, which is intuitive as more weight requires more fuel per gallon, lowering efficiency. Miles per gallon is also inversely related to horsepower, which indicates that more powerful engines are less efficient, which is also intuitive. Engine horsepower is inversely related to acceleration rate, which is again obvious. Finally, miles per gallon seems to slowly increase with year, which indicates that newer cars are more fuel efficient. 
 
 # Q9 Part f
-## The plots suggest that weight and horsepower might be good indicators of miles per gallon, as they both have strong negative linear relationships with mpg. Year is a weaker predictor of miles per gallon, as there may not be a large, if significant difference in miles per gallon of older vehicles vs newer vehicles.
+The plots suggest that weight and horsepower might be good indicators of miles per gallon, as they both have strong negative linear relationships with mpg. Year is a weaker predictor of miles per gallon, as there may not be a large, if significant difference in miles per gallon of older vehicles vs newer vehicles.
 
 
 
